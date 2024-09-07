@@ -1,0 +1,214 @@
+.battle-actions {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.actions-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.actions-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+
+.actions-battle-icon {
+    filter: drop-shadow(0 0px 4px rgb(0, 0, 0));
+}
+
+.actions-battle-icon img {
+    width: 100px;
+}
+
+.actions-ap {
+    display: flex;
+    justify-content: left;
+    width: 150px;
+    flex-wrap: wrap;
+}
+
+.actions-ap .ap {
+    width: 20px;
+    height: 7px;
+    box-sizing: border-box;
+    margin: 2px;
+    background-color: white;
+}
+
+.actions-ap .ap.empty {
+    border: 1px solid #9d9d9d;
+    background-color: transparent;
+}
+
+.actions {
+    display: flex;
+}
+
+.action {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.action .action-bg {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: 0.5s;
+}
+
+.action.active .action-bg,
+.action:hover .action-bg {
+    transform: scale(1.2);
+}
+
+.action-tooltip {
+    transition: opacity 0.5s ease-in 0s;
+    opacity: 0;
+}
+
+.tooltip-description,
+.tooltip-title {
+    display: none;
+}
+
+.action:hover .tooltip-description,
+.action:hover .tooltip-title {
+    display: block;
+}
+
+.action:hover .action-tooltip {
+    transform: none;
+    position: absolute;
+    opacity: 1;
+    transition-delay: 0.5s;
+    display: flex;
+    width: 250px;
+    height: 170px;
+    background: rgba(0, 0, 0, 0.7);
+    right: -100px;
+    top: -160px;
+    color: #fff;
+    padding: 5px 0 10px;
+    box-sizing: border-box;
+    z-index: 9;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.action-tooltip .tooltip-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.action-tooltip .tooltip-description {
+    text-align: center;
+    font-size: 12px;
+}
+
+.action.inactive {
+    cursor: default;
+    pointer-events: none;
+    filter: brightness(20%) !important;
+}
+
+.action.inactive:hover {
+    transform: none;
+}
+
+.action.hit .action-bg {
+    /*background-color: #f75050c7;*/
+    background-image: url('../img/battle-icons/hit-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.hitRow .action-bg {
+    background-image: url('../img/battle-icons/hitRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.shoot .action-bg {
+    /*background-color: #f75050c7;*/
+    background-image: url('../img/battle-icons/shoot-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.shootRow .action-bg {
+    background-image: url('../img/battle-icons/shootRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.shield .action-bg {
+    background-image: url('../img/battle-icons/shield-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 4, 255));
+}
+
+.action.shieldRow .action-bg {
+    background-image: url('../img/battle-icons/shieldRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 4, 255));
+}
+
+.action.shieldSelf .action-bg {
+    background-image: url('../img/battle-icons/shield-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 4, 255));
+}
+
+.action.buff .action-bg {
+    background-image: url('../img/battle-icons/buff-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 230, 79));
+}
+
+.action.buffRow .action-bg {
+    background-image: url('../img/battle-icons/buffRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 230, 79));
+}
+
+.action.debuff .action-bg {
+    background-image: url('../img/battle-icons/debuff-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
+}
+
+.action.debuffRow .action-bg {
+    background-image: url('../img/battle-icons/debuffRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
+}
+
+.actions-extra {
+    display: flex;
+}
+
+.action.move .action-bg {
+    background-image: url('../img/battle-icons/move-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 231, 255));
+}
+
+.action.finish .action-bg {
+    background-image: url('../img/battle-icons/finish-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(255, 0, 227));
+}
+
+.actions-ap-cost {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 2px;
+}
+
+.actions-ap-cost .ap-cost {
+    width: 7px;
+    height: 5px;
+    box-sizing: border-box;
+    margin: 1px;
+    background-color: #e3c7bcc9;
+}

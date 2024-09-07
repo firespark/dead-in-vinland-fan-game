@@ -1,0 +1,11 @@
+.about-screen {
+    min-height: 70vh;
+    padding: 4rem 0 6rem;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 2rem auto;
+    color: #fff;
+    font-size: 18px;
+}

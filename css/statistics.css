@@ -1,0 +1,35 @@
+.statistics-screen {
+    min-height: 70vh;
+    padding: 4rem 0 6rem;
+}
+
+.statistics-table {
+    font-size: 20px;
+    margin-top: 30px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px 10px;
+}
+
+.statistics-table .table-row {
+    display: contents;
+}
+
+.statistics-table .table-row.table-header {
+    font-weight: bold;
+    color: #fd8888;
+}
+
+.statistics-table .table-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.statistics-table .table-cell img {
+    width: 30px;
+}

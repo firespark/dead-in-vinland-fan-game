@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="description" content="Combat Game (Dead in Vinland Fan Game)">
+        <meta name="keywords" content="">
+
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+        <link rel="stylesheet" href="css/settings.css">
+        <link rel="stylesheet" href="css/battlefield.css">
+        <link rel="stylesheet" href="css/unit.css">
+        <link rel="stylesheet" href="css/fight.css">
+        <link rel="stylesheet" href="css/actions.css">
+        <link rel="stylesheet" href="css/notice.css">
+        <link rel="stylesheet" href="css/statistics.css">
+        <link rel="stylesheet" href="css/about.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <title>Combat Game (Dead in Vinland Fan Game)</title>
+    </head>
+
+    <body>
+        <header>
+            <div class="container">
+                <div class="header-container">
+                    <div class="logo exit-link" data-animal="main">
+                        <img src="img/logo.png" alt="">
+                        <div class="logo-text">Combat Game (Dead in Vinland Fan Game)</div>
+                    </div>
+                    <nav>
+                        <ul class="nav-menu">
+                            <li class="nav-link stat-link">Statistics</li>
+                            <li class="nav-link about-link">About Project</li>
+                            <li class="nav-link exit-link">Exit</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main>
+
+            <!-- SETTINGS SCREEN -->
+            <div class="settings-screen">
+                <div class="container">
+                    
+                    <div class="settings-header">
+                        <div class="settings-img">
+                            <img src="img/logo.png" alt="">
+                        </div>
+                        <h1>Combat Game (Dead in Vinland Fan Game)</h1>
+                    </div>
+                    <div class="settings-level">
+                        <div class="settings-title">Choose difficulty level</div>
+                        <div class="settings-level-block">
+                            <div class="level easy active" data-level="easy">Easy</div>
+                            <div class="level medium" data-level="medium">Medium</div>
+                            <div class="level hard" data-level="hard">Hard</div>
+                        </div>
+                    </div>
+                    <div class="settings-warriors">
+                        <div class="settings-title">Choose 3 warriors</div>
+                        <div class="settings-warriors-wrapper"></div>
+                    </div>
+                    <div class="settings-submit">
+                        <div class="settings-submit-button disabled">Start</div>
+                    </div>
+                </div>
+            </div> 
+
+            <!-- MAIN SCREEN -->
+            <div class="main-screen dnone">
+
+                <div class="battle-screen">
+                    <div class="battle-top">
+                        <div class="battle-order"></div>
+                        <div class="battle-description">
+                            FIGHT!
+                        </div>
+                    </div>
+
+                    <div class="battlefield">
+                        <div class="left-field">
+                            <div class="field-row" data-type="ranged">
+                                <div id="section1" class="field-row-section"></div>
+                                <div id="section2" class="field-row-section"></div>
+                                <div id="section3" class="field-row-section"></div>
+                            </div>
+                            <div class="field-row" data-type="melee">
+                                <div id="section4" class="field-row-section"></div>
+                                <div id="section5" class="field-row-section"></div>
+                                <div id="section6" class="field-row-section"></div>
+                            </div>
+                        </div>
+                        <div class="right-field">
+                            <div class="field-row" data-type="melee">
+                                <div id="section7" class="field-row-section"></div>
+                                <div id="section8" class="field-row-section"></div>
+                                <div id="section9" class="field-row-section"></div>
+                            </div>
+                            <div class="field-row" data-type="ranged">
+                                <div id="section10" class="field-row-section"></div>
+                                <div id="section11" class="field-row-section"></div>
+                                <div id="section12" class="field-row-section"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="battle-actions">
+                        <div class="actions-wrapper">
+                            <div class="actions-container">
+                                <div class="actions-battle-icon">
+                                    <img id="battle-icon" src="img/erik/battleIcon.png">
+                                </div>
+                                <div class="actions-ap"></div>
+                                <div class="actions"></div>
+                                <div class="actions-extra">
+                                    <div class="action move" id="move-unit">
+                                        <div class="action-bg"></div>
+                                        <div class="action-tooltip">
+                                            <div class="tooltip-title">Move</div>
+                                            <div class="tooltip-description">
+                                                Moves unit to another row<br>
+                                                AP Cost: 1<br>
+                                            </div>
+                                        </div>
+                                        <div class="actions-ap-cost">
+                                            <div class="ap-cost"></div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="action finish" id="end-turn">
+                                        <div class="action-bg"></div>
+                                        <div class="action-tooltip">
+                                            <div class="tooltip-title">End turn</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fight-overlay dnone">
+                    <div class="fight-block">
+                        <div class="fight-block-row">
+                            <div class="fight-left"></div>
+                            <div class="fight-right"></div>
+                        </div>
+                        <div class="fight-icon"></div>
+                    </div>
+                </div>
+
+                <div class="notice-overlay dnone">
+                    <div class="notice-block success dnone">
+                        <div class="notice-img">
+                            <img src="img/battle-icons/success.png" alt="">
+                        </div>
+                        <div class="notice-text">
+                            Congratulations! You won!
+                        </div>
+                        <div class="notice-buttons">
+                            <div class="notice-button play-again exit-link">Play Again</div>
+                            <div class="notice-button statistics stat-link">Statistics</div>
+                        </div>
+                    </div>
+                    <div class="notice-block fail dnone">
+                        <div class="notice-img">
+                            <img src="img/battle-icons/death.png" alt="">
+                        </div>
+                        <div class="notice-text">
+                            Lol You died!
+                        </div>
+                        <div class="notice-buttons">
+                            <div class="notice-button play-again exit-link">Play Again</div>
+                            <div class="notice-button statistics stat-link">Statistics</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATISTICS SCREEN -->
+            <div class="statistics-screen dnone">
+                <div class="container">
+                    <div class="screen-title">Game Statistics</div>
+                    
+                    <div class="statistics-table"></div>
+                    
+                </div>
+            </div>
+
+            <!-- ABOUT SCREEN -->
+            <div class="about-screen dnone">
+                <div class="container">
+                    <div class="screen-title">About Project</div>
+                    
+                    <div class="about-content">
+                        
+                        <p>This non-profit fan game is a studying project based on a survival game "Dead in Vinland".</p>
+                        <p>The project represents a simplified version of the original game battles.</p>
+                        <p>The project uses some images and characters created by original game developers.</p>
+                        <p>Developer of this fan game does not own any trademarked material presented here.</p>
+
+                        <p>"Dead in Vinland" game website - <a href="https://deadinvinland.com/" target="_blank">https://deadinvinland.com</a></p>
+                        <p>Buy "Dead in Vinland" on Steam - <a href="https://store.steampowered.com/app/573120/Dead_In_Vinland/" target="_blank">https://store.steampowered.com</a></p>
+                    </div>
+                    
+                </div>
+            </div> 
+
+            
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-container">
+                    <div class="footer-block">
+                        <a class="footer-github" href="https://github.com/firespark" target="_blank">
+                            <img src="img/github.svg" alt="">
+                            <span>https://github.com/firespark</span>
+                        </a>
+                    </div>
+                    <div class="footer-block">
+                        <span id="year"></span>
+                    </div>
+
+                    <div class="footer-block">
+                        <a class="footer-rss" href="https://rs.school/" target="_blank">
+                            <img src="img/rss.svg" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <script src="js/helpers.js"></script>
+        <script src="js/links.js"></script>
+        <script src="js/skills.js"></script>
+        <script src="js/warriors.js"></script>
+
+        <script src="js/initUnits.js"></script>
+
+        <script src="js/ai.js"></script>
+        <script src="js/actions.js"></script>
+        <script src="js/listeners.js"></script>
+        
+        <script src="js/startGame.js"></script>
+        <script src="js/index.js"></script>
+        
+    </body>
+</html>
