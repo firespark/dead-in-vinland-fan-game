@@ -219,7 +219,7 @@ const enemiesObj = {
         strength: 40,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 1,
         level: 1,
     },
     4: {
@@ -232,7 +232,7 @@ const enemiesObj = {
         strength: 40,
         defense: 0,
         aim: 80,
-        initiative: 4,
+        initiative: 1,
         level: 1,
     },
     5: {
@@ -245,7 +245,7 @@ const enemiesObj = {
         strength: 40,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 3,
         level: 1,
     },
     6: {
@@ -258,7 +258,7 @@ const enemiesObj = {
         strength: 40,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 1,
         level: 1,
     },
     7: {
@@ -271,7 +271,7 @@ const enemiesObj = {
         strength: 100,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 1,
         level: 2,
     },
     8: {
@@ -284,7 +284,7 @@ const enemiesObj = {
         strength: 100,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 2,
         level: 2,
     },
     9: {
@@ -297,7 +297,7 @@ const enemiesObj = {
         strength: 100,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 1,
         level: 2,
     },
     10: {
@@ -310,7 +310,7 @@ const enemiesObj = {
         strength: 100,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 1,
         level: 2,
     },
     11: {
@@ -323,7 +323,7 @@ const enemiesObj = {
         strength: 100,
         defense: 0,
         aim: 70,
-        initiative: 4,
+        initiative: 2,
         level: 3,
     },
 };
