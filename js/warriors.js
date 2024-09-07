@@ -254,7 +254,7 @@ const enemiesObj = {
         description: '',
         hp: 15,
         ap: 8,
-        skills: ['shoot', 'shootRow', 'shieldSelf'],
+        skills: ['whip', 'whipRow', 'shieldSelf'],
         strength: 40,
         defense: 0,
         aim: 70,

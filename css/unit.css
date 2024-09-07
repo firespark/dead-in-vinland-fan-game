@@ -85,7 +85,8 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
-    opacity: 1;
+    animation: zoom-in 3s ease-in-out;
+
 }
 
 .unit .icon-image.attack-image {
@@ -102,6 +103,10 @@
 
 .unit .icon-image.debuff-image {
     background-image: url('../img/battle-icons/debuff.png');
+}
+
+.unit .icon-image.death-image {
+    background-image: url('../img/battle-icons/death.png');
 }
 
 .unit-effects {

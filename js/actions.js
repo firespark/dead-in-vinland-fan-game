@@ -345,3 +345,14 @@ function hitCam(origin, targetArray, damageArray, actionType) {
     );
 }
 
+function checkIfWon() {
+    if (getRandomFoe() == 'Nothing') {
+        gameWon();
+        return;
+    }
+    if (getRandomHero() == 'Nothing') {
+        gameOver();
+        return;
+    }
+
+}

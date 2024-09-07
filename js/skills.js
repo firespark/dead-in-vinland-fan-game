@@ -388,6 +388,79 @@ const skillsObj = {
             }
         },
     },
+    whip: {
+        type: 8,
+        name: 'Whip',
+        img: '',
+        description: 'Crack',
+        attack: 3,
+        defenseBuff: 0,
+        apCost: 3,
+        chance: 100,
+        onEnemy: true,
+        self: false,
+        rowType: 'ranged',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                if (isHit(allUnits[origin])) {
+                    const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
+                    logString(`${allUnits[origin].name} attacks ${allUnits[target].name} for ${damageAmount} damage`);
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack');
+                    allUnits[target].damageUnit(damageAmount);
+                    allUnits[target].resetBuffs();
+                }
+                else {
+                    logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack');
+                }
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
+
+    whipRow: {
+        type: 9,
+        name: 'Whip Row',
+        img: '',
+        description: 'Many Crack',
+        attack: 2,
+        defenseBuff: 0,
+        apCost: 4,
+        chance: 60,
+        onEnemy: true,
+        self: false,
+        affectsRow: true,
+        rowType: 'ranged',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[origin].ap >= this.apCost) {
+                logString(`${allUnits[origin].name} attacks the row of their enemies`);
+                const targetArray = [];
+                const damageArray = [];
+                const currentRowUnits = document.getElementById(`section${allUnits[target].pos}`).parentNode.querySelectorAll('.unit');
+                currentRowUnits.forEach((unit) => {
+                    const unitID = unit.dataset.id;
+                    if (allUnits[unitID].alive) {
+                        if (isHit(allUnits[origin])) {
+                            const damageAmount = calculateDamage(allUnits[origin], allUnits[unitID], this.attack, this.rowType);
+                            allUnits[unitID].damageUnit(damageAmount);
+                            allUnits[unitID].resetBuffs();
+                            damageArray.push(damageAmount)
+                        }
+                        else {
+                            damageArray.push('Miss')
+                        }
+                        targetArray.push(allUnits[unitID]);
+
+                    }
+                });
+
+                hitCam(allUnits[origin], targetArray, damageArray, 'attack');
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
 
     move: {
         type: 100,

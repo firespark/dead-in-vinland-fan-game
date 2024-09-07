@@ -9,7 +9,9 @@ const aScreen = document.querySelector('.about-screen');
 
 function checkQuitGame() {
     if (!mScreen.classList.contains('dnone')) {
-        if (confirm('Are you sure You want to quit?') == true) {
+        if (confirm('Are you sure you want to restart?') == true) {
+            document.querySelector('.notice-overlay').classList.add('dnone');
+            document.querySelector('.notice-block.success').classList.add('dnone');
             gameEnded = true;
             allUnits = [];
             selectedWarriors = [];

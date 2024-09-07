@@ -64,9 +64,36 @@ class Unit {
 
     killUnit() {
         this.alive = false;
-        const currentPosDiv = document.getElementById(`section${this.pos}`);
-        currentPosDiv.innerHTML = '';
-        setUnitOrderBar();
+
+        const unitBody = document.querySelector(`.unit[data-id="${this.id}"] .unit-body`);
+        const unitPosition = this.pos;
+        if (unitBody) {
+            const iconDiv = document.createElement('div');
+
+            iconDiv.classList.add('animated-image');
+            iconDiv.classList.add('icon-image');
+            iconDiv.classList.add(`death-image`);
+
+
+            iconDiv.addEventListener(
+                'animationend',
+                function () {
+                    const currentPosDiv = document.getElementById(`section${unitPosition}`);
+                    currentPosDiv.innerHTML = '';
+                    setUnitOrderBar();
+                    checkIfWon();
+                }
+            );
+            unitBody.append(iconDiv);
+            delay(3000).then(function () {
+                const currentPosDiv = document.getElementById(`section${unitPosition}`);
+                currentPosDiv.innerHTML = '';
+                setUnitOrderBar();
+                checkIfWon();
+            })
+        }
+
+
     }
 
     setVisualHP() {
@@ -209,5 +236,6 @@ function fillAllUnitList(selectedHeroes, level = 'easy', selectedEnemies = [0, 0
     allUnits = allUnits.sort((a, b) => b.initiative - a.initiative);
     allUnits.forEach((unit, index) => {
         unit.id = index;
+        if (unit.enemy) unit.hp = 1;
     });
 }

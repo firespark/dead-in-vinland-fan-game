@@ -148,6 +148,17 @@
     filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
 }
 
+.action.whip .action-bg {
+    /*background-color: #f75050c7;*/
+    background-image: url('../img/battle-icons/whip-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.whipRow .action-bg {
+    background-image: url('../img/battle-icons/whipRow-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
 .action.shield .action-bg {
     background-image: url('../img/battle-icons/shield-icon.png');
     filter: drop-shadow(0 0px 6px rgb(0, 4, 255));
