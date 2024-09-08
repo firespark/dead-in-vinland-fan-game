@@ -7,11 +7,14 @@ const mScreen = document.querySelector('.main-screen');
 const stScreen = document.querySelector('.statistics-screen');
 const aScreen = document.querySelector('.about-screen');
 const nScreen = document.querySelector('.notice-overlay');
+const nSuccess = document.querySelector('.notice-block.success');
+const nFail = document.querySelector('.notice-block.fail');
 
 function checkQuitGame() {
     if (!mScreen.classList.contains('dnone') && nScreen.classList.contains('dnone')) {
         if (confirm('Are you sure you want to quit?') == true) {
             cleanUpEndGame();
+
             return true;
         }
         return false;
@@ -87,12 +90,24 @@ statLinks.forEach(link => {
     link.addEventListener("click", function () {
         playAudio('click');
         if (checkQuitGame()) {
-            document.querySelector('.notice-overlay').classList.add('dnone');
-            document.querySelector('.notice-block.success').classList.add('dnone');
+
+            nScreen.classList.add('dnone');
+            if (!nSuccess.classList.contains('dnone')) {
+                nSuccess.classList.add('dnone');
+            }
+            if (!nFail.classList.contains('dnone')) {
+                nFail.classList.add('dnone');
+            }
+
             changeScreen(stScreen);
         }
-        document.querySelector('.notice-overlay').classList.add('dnone');
-        document.querySelector('.notice-block.success').classList.add('dnone');
+        nScreen.classList.add('dnone');
+        if (!nSuccess.classList.contains('dnone')) {
+            nSuccess.classList.add('dnone');
+        }
+        if (!nFail.classList.contains('dnone')) {
+            nFail.classList.add('dnone');
+        }
         createStatisticsResults();
     });
 });
@@ -101,8 +116,13 @@ aboutLinks.forEach(link => {
     link.addEventListener("click", function () {
         playAudio('click');
         if (checkQuitGame()) {
-            document.querySelector('.notice-overlay').classList.add('dnone');
-            document.querySelector('.notice-block.success').classList.add('dnone');
+            nScreen.classList.add('dnone');
+            if (!nSuccess.classList.contains('dnone')) {
+                nSuccess.classList.add('dnone');
+            }
+            if (!nFail.classList.contains('dnone')) {
+                nFail.classList.add('dnone');
+            }
             changeScreen(aScreen);
         }
     });
@@ -112,8 +132,13 @@ exitLinks.forEach(link => {
     link.addEventListener("click", function () {
         playAudio('click');
         if (checkQuitGame()) {
-            document.querySelector('.notice-overlay').classList.add('dnone');
-            document.querySelector('.notice-block.success').classList.add('dnone');
+            nScreen.classList.add('dnone');
+            if (!nSuccess.classList.contains('dnone')) {
+                nSuccess.classList.add('dnone');
+            }
+            if (!nFail.classList.contains('dnone')) {
+                nFail.classList.add('dnone');
+            }
             changeScreen(sScreen);
         }
     });

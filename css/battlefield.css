@@ -20,21 +20,21 @@
 .battle-order {
     display: flex;
     justify-content: center;
-    width: 500px;
+    width: 430px;
     margin: 10px auto 0;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
 }
 
 .battle-description {
-    width: 500px;
-    margin: 10px auto 0;
+    width: 430px;
+    margin: 5px auto 0;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
     padding: 10px;
     box-sizing: border-box;
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     color: #fff;
 }
 

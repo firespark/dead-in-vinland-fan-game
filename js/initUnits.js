@@ -18,7 +18,14 @@ function createAp(apNumber, maxAp = apNumber) {
     }
     return output;
 }
-
+class Buff {
+    constructor(name, defense, strength, aim) {
+        this.name = name;
+        this.defense = defense;
+        this.strength = strength;
+        this.aim = aim;
+    }
+}
 class Unit {
     constructor(enemy, warriorID, position, unitID = 0) {
         const unitTypeObject = enemy ? enemiesObj[warriorID] : warriorsObj[warriorID];
@@ -55,10 +62,38 @@ class Unit {
     }
 
     resetBuffs() {
-        this.defense = this.defenseBase;
-        this.strength = this.strengthBase;
-        this.aim = this.aimBase;
-        this.buffArray = [];
+        if (this.buffArray.length > 0) {
+            this.buffArray.forEach((effect, index) => {
+                if (effect.name == 'shield' || effect.name == 'buff') {
+                    this.defense -= effect.defense;
+                    this.strength -= effect.strength;
+                    this.aim -= effect.strength;
+                }
+            });
+            let filteredBuffs = this.buffArray.filter(function (buff) {
+                return buff.name == 'debuff';
+            });
+            this.buffArray = filteredBuffs;
+        }
+
+        drawStatusEffects(this.id);
+    }
+
+    resetDebuffs() {
+        if (this.buffArray.length > 0) {
+            this.buffArray.forEach((effect, index) => {
+                if (effect.name == 'debuff') {
+                    this.defense += effect.defense;
+                    this.strength += effect.strength;
+                    this.aim += effect.strength;
+                    this.buffArray.splice(index, 1);
+                }
+            });
+            let filteredBuffs = this.buffArray.filter(function (buff) {
+                return buff.name == 'shield' || buff.name == 'buff';
+            });
+            this.buffArray = filteredBuffs;
+        }
         drawStatusEffects(this.id);
     }
 
@@ -130,7 +165,7 @@ function createUnit(unit) {
                                             <div class="effect-icons">
 
                                             </div>
-                                            <div class="effect-text">Defence: ${unit.defense} | Strength: ${unit.strength} | Aim: ${unit.aim}</div>
+                                            <div class="effect-text">Defense: ${unit.defense} | Strength: ${unit.strength} | Aim: ${unit.aim}</div>
                                         </div>
                                         <div class="unit-body">
                                             <img

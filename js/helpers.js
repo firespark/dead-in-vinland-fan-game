@@ -1,5 +1,5 @@
-const wrongLanePenalty = 50;
-const wrongLaneShieldPenalty = 50;
+const wrongLanePenalty = 30;
+const wrongLaneShieldPenalty = 30;
 
 
 function recreateNode(element) {
@@ -90,13 +90,13 @@ function drawStatusEffects(targetID) {
         iconsDiv.classList.add('effect-icons');
         allUnits[targetID].buffArray.forEach(buff => {
             let icon = document.createElement('img');
-            icon.src = `img/battle-icons/small-${buff}.png`;
+            icon.src = `img/battle-icons/small-${buff.name}.png`;
             iconsDiv.append(icon);
         });
 
         let statsDiv = document.createElement('div');
         statsDiv.classList.add('effect-text');
-        statsDiv.innerHTML = `Defence: ${allUnits[targetID].defense} | Strength: ${allUnits[targetID].strength} | Aim: ${allUnits[targetID].aim}`
+        statsDiv.innerHTML = `Defense: ${allUnits[targetID].defense} | Strength: ${allUnits[targetID].strength} | Aim: ${allUnits[targetID].aim}`
 
         statusBar.append(iconsDiv);
         statusBar.append(statsDiv);

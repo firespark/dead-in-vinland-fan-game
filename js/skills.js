@@ -20,12 +20,12 @@ const skillsObj = {
                     logString(`${allUnits[origin].name} hits ${allUnits[target].name} for ${damageAmount} damage`);
                     hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
-                    allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
                     hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -58,7 +58,6 @@ const skillsObj = {
                         if (isHit(allUnits[origin])) {
                             const damageAmount = calculateDamage(allUnits[origin], allUnits[unitID], this.attack, this.rowType);
                             allUnits[unitID].damageUnit(damageAmount);
-                            allUnits[unitID].resetBuffs();
                             damageArray.push(damageAmount)
                         }
                         else {
@@ -69,7 +68,9 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound); allUnits[origin].changeAP(this.apCost);
+                hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound);
+                allUnits[origin].resetDebuffs();
+                allUnits[origin].changeAP(this.apCost);
             }
         },
     },
@@ -92,8 +93,8 @@ const skillsObj = {
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} protects themselves against ${this.defenseBuff}% of damage`)
                 hitCam(allUnits[origin], [], [], 'shield', this.sound);
-
-                allUnits[target].buffArray.push('shield');
+                let buff = new Buff('shield', this.defenseBuff, 0, 0);
+                allUnits[target].buffArray.push(buff);
                 allUnits[target].defense += this.defenseBuff;
 
                 drawStatusEffects(target);
@@ -108,7 +109,7 @@ const skillsObj = {
         img: '',
         description: 'Protecc one',
         attack: 0,
-        defenseBuff: 50,
+        defenseBuff: 60,
         apCost: 3,
         chance: 100,
         onEnemy: false,
@@ -126,7 +127,8 @@ const skillsObj = {
                     defenseBuffAmount = Math.round(percentageSubstract(defenseBuffAmount, wrongLaneShieldPenalty));
                 }
 
-                allUnits[target].buffArray.push('shield');
+                let buff = new Buff('shield', defenseBuffAmount, 0, 0);
+                allUnits[target].buffArray.push(buff);
                 allUnits[target].defense += defenseBuffAmount;
                 drawStatusEffects(target);
                 allUnits[origin].changeAP(this.apCost);
@@ -140,7 +142,7 @@ const skillsObj = {
         img: '',
         description: 'Protecc row',
         attack: 0,
-        defenseBuff: 30,
+        defenseBuff: 40,
         apCost: 4,
         chance: 100,
         onEnemy: false,
@@ -163,7 +165,8 @@ const skillsObj = {
                 currentRowUnits.forEach((unit) => {
                     const unitID = unit.dataset.id;
                     if (allUnits[unitID].alive) {
-                        allUnits[unitID].buffArray.push('shield');
+                        let buff = new Buff('shield', defenseBuffAmount, 0, 0);
+                        allUnits[unitID].buffArray.push(buff);
                         allUnits[unitID].defense += defenseBuffAmount;
                         drawStatusEffects(unitID);
                         targetArray.push(allUnits[unitID]);
@@ -182,9 +185,9 @@ const skillsObj = {
         img: '',
         description: 'Protecc n Stronk',
         attack: 0,
-        defenseBuff: 30,
-        strengthBuff: 30,
-        aimBuff: 30,
+        defenseBuff: 15,
+        strengthBuff: 15,
+        aimBuff: 15,
         apCost: 2,
         chance: 100,
         onEnemy: false,
@@ -197,7 +200,9 @@ const skillsObj = {
                 logString(`${allUnits[origin].name} buffs ${allUnits[target].name}'s strength, aim and defense`)
 
                 hitCam(allUnits[origin], [allUnits[target]], [], 'buff', this.sound);
-                allUnits[target].buffArray.push('buff');
+
+                let buff = new Buff('buff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                allUnits[target].buffArray.push(buff);
 
                 allUnits[target].strength += this.strengthBuff;
                 allUnits[target].defense += this.defenseBuff;
@@ -214,9 +219,9 @@ const skillsObj = {
         img: '',
         description: 'Weak and stupid',
         attack: 0,
-        defenseBuff: 30,
-        strengthBuff: 30,
-        aimBuff: 30,
+        defenseBuff: 15,
+        strengthBuff: 15,
+        aimBuff: 15,
         apCost: 2,
         chance: 100,
         onEnemy: true,
@@ -229,7 +234,9 @@ const skillsObj = {
                 logString(`${allUnits[origin].name} weakens ${allUnits[target].name}'s strength, aim and defense`)
 
                 hitCam(allUnits[origin], [allUnits[target]], [], 'debuff', this.sound);
-                allUnits[target].buffArray.push('debuff');
+
+                let buff = new Buff('debuff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                allUnits[target].buffArray.push(buff);
 
                 allUnits[target].strength -= this.strengthBuff;
                 allUnits[target].defense -= this.defenseBuff;
@@ -247,9 +254,9 @@ const skillsObj = {
         img: '',
         description: 'Buff row',
         attack: 0,
-        defenseBuff: 20,
-        strengthBuff: 20,
-        aimBuff: 20,
+        defenseBuff: 10,
+        strengthBuff: 10,
+        aimBuff: 10,
         apCost: 4,
         chance: 100,
         onEnemy: false,
@@ -267,7 +274,8 @@ const skillsObj = {
                 currentRowUnits.forEach((unit) => {
                     const unitID = unit.dataset.id;
                     if (allUnits[unitID].alive) {
-                        allUnits[unitID].buffArray.push('buff');
+                        let buff = new Buff('buff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                        allUnits[unitID].buffArray.push(buff);
 
                         allUnits[unitID].strength += this.strengthBuff;
                         allUnits[unitID].defense += this.defenseBuff;
@@ -290,9 +298,9 @@ const skillsObj = {
         img: '',
         description: 'Debuff row',
         attack: 0,
-        defenseBuff: 20,
-        strengthBuff: 20,
-        aimBuff: 20,
+        defenseBuff: 10,
+        strengthBuff: 10,
+        aimBuff: 10,
         apCost: 4,
         chance: 100,
         onEnemy: true,
@@ -310,7 +318,8 @@ const skillsObj = {
                 currentRowUnits.forEach((unit) => {
                     const unitID = unit.dataset.id;
                     if (allUnits[unitID].alive) {
-                        allUnits[unitID].buffArray.push('debuff');
+                        let buff = new Buff('debuff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                        allUnits[unitID].buffArray.push(buff);
 
                         allUnits[unitID].strength -= this.strengthBuff;
                         allUnits[unitID].defense -= this.defenseBuff;
@@ -346,12 +355,12 @@ const skillsObj = {
                     logString(`${allUnits[origin].name} attacks ${allUnits[target].name} for ${damageAmount} damage`);
                     hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
-                    allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
                     hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -384,7 +393,6 @@ const skillsObj = {
                         if (isHit(allUnits[origin])) {
                             const damageAmount = calculateDamage(allUnits[origin], allUnits[unitID], this.attack, this.rowType);
                             allUnits[unitID].damageUnit(damageAmount);
-                            allUnits[unitID].resetBuffs();
                             damageArray.push(damageAmount)
                         }
                         else {
@@ -396,6 +404,7 @@ const skillsObj = {
                 });
 
                 hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound);
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -421,12 +430,12 @@ const skillsObj = {
                     logString(`${allUnits[origin].name} attacks ${allUnits[target].name} for ${damageAmount} damage`);
                     hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
-                    allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
                     hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -459,7 +468,6 @@ const skillsObj = {
                         if (isHit(allUnits[origin])) {
                             const damageAmount = calculateDamage(allUnits[origin], allUnits[unitID], this.attack, this.rowType);
                             allUnits[unitID].damageUnit(damageAmount);
-                            allUnits[unitID].resetBuffs();
                             damageArray.push(damageAmount)
                         }
                         else {
@@ -471,6 +479,7 @@ const skillsObj = {
                 });
 
                 hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound);
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -496,12 +505,12 @@ const skillsObj = {
                     logString(`${allUnits[origin].name} hits ${allUnits[target].name} for ${damageAmount} damage`);
                     hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
-                    allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
                     hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
+                allUnits[origin].resetDebuffs();
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -527,7 +536,9 @@ const skillsObj = {
                 logString(`${allUnits[origin].name} buffs ${allUnits[target].name}'s strength, aim and defense`)
 
                 hitCam(allUnits[origin], [allUnits[target]], [], 'buff', this.sound);
-                allUnits[target].buffArray.push('buff');
+                let buff = new Buff('buff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                allUnits[target].buffArray.push(buff);
+
 
                 allUnits[target].strength += this.strengthBuff;
                 allUnits[target].defense += this.defenseBuff;
@@ -559,7 +570,8 @@ const skillsObj = {
                 logString(`${allUnits[origin].name} weakens ${allUnits[target].name}'s strength, aim and defense`)
 
                 hitCam(allUnits[origin], [allUnits[target]], [], 'debuff', this.sound);
-                allUnits[target].buffArray.push('debuff');
+                let buff = new Buff('debuff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                allUnits[target].buffArray.push(buff);
 
                 allUnits[target].strength -= this.strengthBuff;
                 allUnits[target].defense -= this.defenseBuff;
