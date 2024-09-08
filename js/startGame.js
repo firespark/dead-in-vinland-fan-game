@@ -46,6 +46,7 @@ function difficultyChoice() {
     const levelDivs = document.querySelectorAll('.level');
     levelDivs.forEach(element => {
         element.addEventListener('click', function () {
+            playAudio('click');
             levelDivs.forEach(level => {
                 level.classList.remove('active');
             });
@@ -60,6 +61,8 @@ function settingsWarriorsAddOnClick() {
     const submitButton = document.querySelector('.settings-submit-button');
     warriorDivs.forEach(element => {
         element.addEventListener('click', function () {
+
+            playAudio('click');
 
             warriorDivs.forEach(warrior => {
                 warrior.classList.remove('disabled');
@@ -115,6 +118,7 @@ function startGameButton() {
             setUnitOrderBar();
             setStatusBar();
             resetHighlight();
+            playAudio('start');
             delay(2000).then(function () {
                 gameEnded = false;
                 //enableAI = true;

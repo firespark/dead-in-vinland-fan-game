@@ -64,7 +64,7 @@ function calculateDamage(origin, target, damageAmount, attackType = 'melee') {
     if ((rowType != attackType) && attackType != 'any') {
         let oldDamage = damageTotal;
         damageTotal = Math.round(percentageSubstract(damageAmount, wrongLanePenalty));
-        console.log(`applied penalty - reduced from ${oldDamage} to ${damageTotal}`)
+        //console.log(`applied penalty - reduced from ${oldDamage} to ${damageTotal}`)
     }
 
     return damageTotal;
@@ -119,7 +119,7 @@ function statisticsAdd(result) {
     statCondition.push(statObjItem);
     localStorage.setItem('statCondition', JSON.stringify(statCondition));
 
-    console.log(statCondition);
+    //console.log(statCondition);
 }
 
 function getRandomInt(min, max) {
@@ -136,4 +136,34 @@ function shuffleArray(array) {
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
     }
+}
+
+function playAudio(title) {
+    if (title != '') {
+        const audio = new Audio();
+        audio.src = `./audio/${title}.mp3`;
+        audio.currentTime = 0;
+        audio.loop = false;
+        audio.play();
+    }
+}
+
+function cleanUpEndGame() {
+
+    gameEnded = true;
+    allUnits = [];
+    selectedWarriors = [];
+    takenWarriorPlaces = [];
+    takenEnemyPlaces = [];
+    activeUnit = 0;
+    let positions = document.querySelectorAll('.field-row-section');
+    positions.forEach(position => {
+        position.innerHTML = '';
+    });
+    const warriorDivs = document.querySelectorAll('.warrior');
+    warriorDivs.forEach(warrior => {
+        warrior.classList.remove('active');
+        warrior.classList.remove('disabled');
+    });
+    logString(`FIGHT!`);
 }

@@ -64,7 +64,7 @@ class Unit {
 
     killUnit() {
         this.alive = false;
-
+        playAudio('kill');
         const unitBody = document.querySelector(`.unit[data-id="${this.id}"] .unit-body`);
         const unitPosition = this.pos;
         if (unitBody) {
@@ -81,14 +81,11 @@ class Unit {
                     const currentPosDiv = document.getElementById(`section${unitPosition}`);
                     currentPosDiv.innerHTML = '';
                     setUnitOrderBar();
-                    checkIfWon();
+                    //checkIfWon();
                 }
             );
             unitBody.append(iconDiv);
             delay(3000).then(function () {
-                const currentPosDiv = document.getElementById(`section${unitPosition}`);
-                currentPosDiv.innerHTML = '';
-                setUnitOrderBar();
                 checkIfWon();
             })
         }

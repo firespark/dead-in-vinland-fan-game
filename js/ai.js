@@ -8,7 +8,7 @@ async function activateBrain() {
 
             availableActions.forEach((action, index) => {
                 if (skillsObj[action].apCost > allUnits[activeUnit].ap) {
-                    console.log(`removed ${skillsObj[action].name} (${skillsObj[action].apCost}/${allUnits[activeUnit].ap})`);
+                    //console.log(`removed ${skillsObj[action].name} (${skillsObj[action].apCost}/${allUnits[activeUnit].ap})`);
                     availableActions.splice(index, 1);
                 }
             });
@@ -43,7 +43,7 @@ function getRandomFoe() {
 function pickRandomAction(availableActions) {
     let randomID = Math.floor(Math.random() * availableActions.length);
     let randomAction = skillsObj[availableActions[randomID]];
-    console.log(`Chose ${randomAction.name} from ${availableActions} (${randomID} out of ${availableActions.length - 1})`);
+    //console.log(`Chose ${randomAction.name} from ${availableActions} (${randomID} out of ${availableActions.length - 1})`);
     if (randomAction.onEnemy) {
         //console.log(randomAction.name);
         let target = getRandomHero();

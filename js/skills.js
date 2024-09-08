@@ -11,19 +11,20 @@ const skillsObj = {
         onEnemy: true,
         self: false,
         rowType: 'melee',
+        sound: 'hit',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 if (isHit(allUnits[origin])) {
                     const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
                     logString(`${allUnits[origin].name} hits ${allUnits[target].name} for ${damageAmount} damage`);
-                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
                     allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
-                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
                 allUnits[origin].changeAP(this.apCost);
             }
@@ -43,6 +44,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'melee',
+        sound: 'hit',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -67,8 +69,7 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, damageArray, 'attack');
-                allUnits[origin].changeAP(this.apCost);
+                hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound); allUnits[origin].changeAP(this.apCost);
             }
         },
     },
@@ -85,11 +86,12 @@ const skillsObj = {
         onEnemy: false,
         self: true,
         rowType: 'any',
+        sound: 'shield',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} protects themselves against ${this.defenseBuff}% of damage`)
-                hitCam(allUnits[origin], [], [], 'shield');
+                hitCam(allUnits[origin], [], [], 'shield', this.sound);
                 allUnits[target].buffArray.push('shield');
                 allUnits[target].defense += this.defenseBuff;
                 drawStatusEffects(target);
@@ -110,11 +112,12 @@ const skillsObj = {
         onEnemy: false,
         self: false,
         rowType: 'melee',
+        sound: 'shield',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} protects ${allUnits[target].name} against ${this.defenseBuff}% of damage`)
-                hitCam(allUnits[origin], [allUnits[target]], [], 'shield');
+                hitCam(allUnits[origin], [allUnits[target]], [], 'shield', this.sound);
 
                 let defenseBuffAmount = this.defenseBuff;
                 if (getRowType(allUnits[origin]) != this.rowType) {
@@ -142,6 +145,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'melee',
+        sound: 'shield',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -164,7 +168,7 @@ const skillsObj = {
                     }
 
                 });
-                hitCam(allUnits[origin], targetArray, [], 'shield');
+                hitCam(allUnits[origin], targetArray, [], 'shield', this.sound);
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -184,12 +188,13 @@ const skillsObj = {
         onEnemy: false,
         self: false,
         rowType: 'any',
+        sound: 'buff',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} buffs ${allUnits[target].name}'s strength, aim and defense`)
 
-                hitCam(allUnits[origin], [allUnits[target]], [], 'buff');
+                hitCam(allUnits[origin], [allUnits[target]], [], 'buff', this.sound);
                 allUnits[target].buffArray.push('buff');
 
                 allUnits[target].strength += this.strengthBuff;
@@ -215,12 +220,13 @@ const skillsObj = {
         onEnemy: true,
         self: false,
         rowType: 'any',
+        sound: 'debuff',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} weakens ${allUnits[target].name}'s strength, aim and defense`)
 
-                hitCam(allUnits[origin], [allUnits[target]], [], 'debuff');
+                hitCam(allUnits[origin], [allUnits[target]], [], 'debuff', this.sound);
                 allUnits[target].buffArray.push('debuff');
 
                 allUnits[target].strength -= this.strengthBuff;
@@ -248,6 +254,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'any',
+        sound: 'buff',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -270,7 +277,7 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, [], 'buff');
+                hitCam(allUnits[origin], targetArray, [], 'buff', this.sound);
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -290,6 +297,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'any',
+        sound: 'debuff',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -310,7 +318,7 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, [], 'debuff');
+                hitCam(allUnits[origin], targetArray, [], 'debuff', this.sound);
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -327,19 +335,20 @@ const skillsObj = {
         onEnemy: true,
         self: false,
         rowType: 'ranged',
+        sound: 'shoot',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 if (isHit(allUnits[origin])) {
                     const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
                     logString(`${allUnits[origin].name} attacks ${allUnits[target].name} for ${damageAmount} damage`);
-                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
                     allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
-                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
                 allUnits[origin].changeAP(this.apCost);
             }
@@ -359,6 +368,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'ranged',
+        sound: 'shoot',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -383,7 +393,7 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, damageArray, 'attack');
+                hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound);
                 allUnits[origin].changeAP(this.apCost);
             }
         },
@@ -400,19 +410,20 @@ const skillsObj = {
         onEnemy: true,
         self: false,
         rowType: 'ranged',
+        sound: 'whip',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 if (isHit(allUnits[origin])) {
                     const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
                     logString(`${allUnits[origin].name} attacks ${allUnits[target].name} for ${damageAmount} damage`);
-                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
                     allUnits[target].damageUnit(damageAmount);
                     allUnits[target].resetBuffs();
                 }
                 else {
                     logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
-                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack');
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
                 }
                 allUnits[origin].changeAP(this.apCost);
             }
@@ -432,6 +443,7 @@ const skillsObj = {
         self: false,
         affectsRow: true,
         rowType: 'ranged',
+        sound: 'whip',
         use: function (target, origin = activeUnit) {
             resetHighlight();
             if (allUnits[origin].ap >= this.apCost) {
@@ -456,7 +468,7 @@ const skillsObj = {
                     }
                 });
 
-                hitCam(allUnits[origin], targetArray, damageArray, 'attack');
+                hitCam(allUnits[origin], targetArray, damageArray, 'attack', this.sound);
                 allUnits[origin].changeAP(this.apCost);
             }
         },

@@ -21,20 +21,20 @@ let currentDeltaTime = 0;
 
 
 
-
-
 function gameOver() {
     statisticsAdd('Died');
+    playAudio('died');
     document.querySelector('.notice-overlay').classList.remove('dnone');
     document.querySelector('.notice-block.fail').classList.remove('dnone');
-    gameEnded = true;
+    cleanUpEndGame()
 }
 
 function gameWon() {
     statisticsAdd('Won');
+    playAudio('won');
     document.querySelector('.notice-overlay').classList.remove('dnone');
     document.querySelector('.notice-block.success').classList.remove('dnone');
-    gameEnded = true;
+    cleanUpEndGame()
 }
 
 function gameLoop(time) {

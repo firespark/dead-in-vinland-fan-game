@@ -8,25 +8,9 @@ const stScreen = document.querySelector('.statistics-screen');
 const aScreen = document.querySelector('.about-screen');
 
 function checkQuitGame() {
-    if (!mScreen.classList.contains('dnone')) {
+    if (!mScreen.classList.contains('dnone') && !gameEnded) {
         if (confirm('Are you sure you want to restart?') == true) {
-            document.querySelector('.notice-overlay').classList.add('dnone');
-            document.querySelector('.notice-block.success').classList.add('dnone');
-            gameEnded = true;
-            allUnits = [];
-            selectedWarriors = [];
-            takenWarriorPlaces = [];
-            takenEnemyPlaces = [];
-            let positions = document.querySelectorAll('.field-row-section');
-            positions.forEach(position => {
-                position.innerHTML = '';
-            });
-            const warriorDivs = document.querySelectorAll('.warrior');
-            warriorDivs.forEach(warrior => {
-                warrior.classList.remove('active');
-                warrior.classList.remove('disabled');
-            });
-            logString(`FIGHT!`);
+            cleanUpEndGame();
             return true;
         }
         return false;
@@ -52,6 +36,7 @@ function changeScreen(screen) {
 
 function createStatisticsResults() {
     const statResults = localStorage.getItem('statCondition') ? JSON.parse(localStorage.getItem('statCondition')) : [];
+    statResults.reverse();
     const statisticstable = document.querySelector('.statistics-table');
 
     statisticstable.innerHTML = '';
@@ -99,17 +84,24 @@ function createStatisticsResults() {
 
 statLinks.forEach(link => {
     link.addEventListener("click", function () {
+        playAudio('click');
         if (checkQuitGame()) {
+            document.querySelector('.notice-overlay').classList.add('dnone');
+            document.querySelector('.notice-block.success').classList.add('dnone');
             changeScreen(stScreen);
         }
-
+        document.querySelector('.notice-overlay').classList.add('dnone');
+        document.querySelector('.notice-block.success').classList.add('dnone');
         createStatisticsResults();
     });
 });
 
 aboutLinks.forEach(link => {
     link.addEventListener("click", function () {
+        playAudio('click');
         if (checkQuitGame()) {
+            document.querySelector('.notice-overlay').classList.add('dnone');
+            document.querySelector('.notice-block.success').classList.add('dnone');
             changeScreen(aScreen);
         }
     });
@@ -117,7 +109,10 @@ aboutLinks.forEach(link => {
 
 exitLinks.forEach(link => {
     link.addEventListener("click", function () {
+        playAudio('click');
         if (checkQuitGame()) {
+            document.querySelector('.notice-overlay').classList.add('dnone');
+            document.querySelector('.notice-block.success').classList.add('dnone');
             changeScreen(sScreen);
         }
     });

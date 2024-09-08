@@ -64,7 +64,11 @@ function setStatusBar() {
 
         if (skillStats.apCost <= allUnits[activeUnit].ap) {
             button.addEventListener('click', function () {
+                const activeButton = document.querySelector('.action.active');
+                if (activeButton) activeButton.classList.remove('active');
+                button.classList.add('active');
                 resetHighlight();
+                playAudio('skill');
                 targetSelect(skill);
             });
         }
@@ -274,9 +278,10 @@ function setTargetUnitImg(target, action) {
 
 function logString(string) {
     document.querySelector('.battle-description').innerHTML = string;
+    console.log(string)
 }
 
-function hitCam(origin, targetArray, damageArray, actionType) {
+function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {
     const fightOverlay = document.querySelector('.fight-overlay');
     const battleDescription = document.querySelector('.battle-description');
     const leftSide = document.querySelector('.fight-left');
@@ -332,6 +337,8 @@ function hitCam(origin, targetArray, damageArray, actionType) {
 
     battleDescription.classList.add('priority');
     fightOverlay.classList.remove('dnone');
+
+    playAudio(audioName);
 
     fightBlockRow.addEventListener(
         'animationend',
