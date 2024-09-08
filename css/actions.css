@@ -194,6 +194,22 @@
     filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
 }
 
+.action.grannyHit .action-bg {
+    /*background-color: #f75050c7;*/
+    background-image: url('../img/battle-icons/grannyHit-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.grannyBuff .action-bg {
+    background-image: url('../img/battle-icons/grannyBuff-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 230, 79));
+}
+
+.action.grannyDebuff .action-bg {
+    background-image: url('../img/battle-icons/grannyDebuff-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
+}
+
 .actions-extra {
     display: flex;
 }
