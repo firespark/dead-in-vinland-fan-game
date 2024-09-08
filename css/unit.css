@@ -11,7 +11,7 @@
 .unit {
     position: absolute;
     bottom: 0;
-    left: 20%;
+    left: 25%;
 }
 
 .unit-name {
@@ -57,7 +57,7 @@
 }
 
 .unit img {
-    width: 270px;
+    width: 250px;
 }
 
 .unit.active {
@@ -73,7 +73,7 @@
 .unit.select-unit:hover,
 .unit.select-unit.row-selected {
     filter: drop-shadow(0 0 5px crimson);
-    z-index: 8;
+    /*z-index: 8;*/
     transform: scale(1.1);
 }
 
@@ -86,6 +86,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     animation: zoom-in 3s ease-in-out;
+    animation-iteration-count: 1;
 
 }
 

@@ -3,7 +3,7 @@ const endTurnBtn = document.getElementById("end-turn");
 
 moveBtn.addEventListener("click", function () {
     resetHighlight();
-    moveUnit(activeUnit);
+    skillsObj['move'].use(activeUnit);
 });
 
 endTurnBtn.addEventListener("click", function () {

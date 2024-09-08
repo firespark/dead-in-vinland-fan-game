@@ -1,33 +1,17 @@
-function moveUnit(unit) {
-    logString(`${allUnits[unit].name} moves`)
-
-    if (allUnits[unit].ap >= 1) {
-        let newPosition = allUnits[unit].pos;
-        if (!allUnits[unit].enemy) {
-            if (allUnits[unit].pos < 4) newPosition += 3;
-            else newPosition -= 3;
-        } else {
-            if (allUnits[unit].pos < 10) newPosition += 3;
-            else newPosition -= 3;
-        }
-
-        const unitDiv = document.getElementById(`unit${allUnits[unit].id}`).outerHTML;
-        const currentPosDiv = document.getElementById(`section${allUnits[unit].pos}`);
-        currentPosDiv.innerHTML = '';
-        const newPosDiv = document.getElementById(`section${newPosition}`);
-        newPosDiv.innerHTML = unitDiv;
-
-        allUnits[unit].pos = newPosition;
-        allUnits[unit].changeAP(1);
-    }
-}
 
 function endTurn() {
     allUnits[activeUnit].ap = allUnits[activeUnit].maxAP;
+
     activeUnit++;
+
+    while (activeUnit <= allUnits.length - 1 && !allUnits[activeUnit].alive)
+        activeUnit++;
     if (activeUnit > allUnits.length - 1) activeUnit = 0;
-    if (!allUnits[activeUnit].alive) activeUnit++;
-    if (activeUnit > allUnits.length - 1) activeUnit = 0;
+    if (!allUnits[activeUnit].alive) {
+        while (activeUnit <= allUnits.length - 1 && !allUnits[activeUnit].alive)
+            activeUnit++;
+    }
+
     setStatusBar();
     setUnitOrderBar();
     highlightActive();
@@ -118,7 +102,7 @@ function setStatusBar() {
     const moveUnitBtn = document.getElementById('move-unit');
     const endTurnBtn = document.getElementById('end-turn');
 
-    if (allUnits[activeUnit].enemy && enableAI) {
+    if (allUnits[activeUnit].enemy) {
         if (!moveUnitBtn.classList.contains('inactive')) {
             moveUnitBtn.classList.add('inactive');
         }
@@ -293,7 +277,7 @@ function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {
     rightSide.innerHTML = '';
     fightIcon.innerHTML = '';
 
-    gameEnded = true;
+    enableAI = false;
 
     let filename = 'buff.png';
     const originImage = document.createElement('img');
@@ -304,7 +288,9 @@ function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {
     else {
         originImage.classList.add('buff-image');
     }
+
     originImage.src = `img/${origin.imgFolder}/${filename}`;
+
     if (!origin.enemy) {
         leftSide.append(originImage);
         targetArray.forEach(target => {
@@ -345,7 +331,7 @@ function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {
         function () {
             battleDescription.classList.remove('priority');
             fightOverlay.classList.add('dnone');
-            gameEnded = false;
+            enableAI = true;
             activateBrain();
         },
         { once: true }

@@ -4,20 +4,22 @@ async function activateBrain() {
         availableActions = [...allUnits[activeUnit].skills];
         availableActions.push('move');
 
-        while (enableAI && availableActions.length > 0 && allUnits[activeUnit].ap > 0 && !gameEnded && allUnits[activeUnit].enemy) {
+        while (enableAI && availableActions.length > 0 && allUnits[activeUnit].ap > 0 && !gameEnded && allUnits[activeUnit].enemy && allUnits[activeUnit].alive) {
 
             availableActions.forEach((action, index) => {
                 if (skillsObj[action].apCost > allUnits[activeUnit].ap) {
-                    //console.log(`removed ${skillsObj[action].name} (${skillsObj[action].apCost}/${allUnits[activeUnit].ap})`);
                     availableActions.splice(index, 1);
                 }
             });
 
-            await delay(1000).then(function () {
-                pickRandomAction(availableActions);
+            await delay(1500).then(function () {
+                if (document.querySelector('.fight-overlay').classList.contains('dnone')
+                    && (!document.querySelector(`.death-image`))) {
+                    pickRandomAction(availableActions);
+                }
             });
         }
-        await delay(1000).then(function () {
+        await delay(2000).then(function () {
             if (!gameEnded && allUnits[activeUnit].enemy && allUnits[activeUnit].ap < 1) {
                 endTurn();
             }

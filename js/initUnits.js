@@ -64,7 +64,11 @@ class Unit {
 
     killUnit() {
         this.alive = false;
-        playAudio('kill');
+        if (this.name == 'Gudrun')
+            playAudio('grannydeath');
+        else
+            playAudio('kill');
+
         const unitBody = document.querySelector(`.unit[data-id="${this.id}"] .unit-body`);
         const unitPosition = this.pos;
         if (unitBody) {
@@ -86,6 +90,9 @@ class Unit {
             );
             unitBody.append(iconDiv);
             delay(3000).then(function () {
+                const currentPosDiv = document.getElementById(`section${unitPosition}`);
+                currentPosDiv.innerHTML = '';
+                setUnitOrderBar();
                 checkIfWon();
             })
         }
@@ -216,6 +223,7 @@ function placeUnits() {
 }
 function fillAllUnitList(selectedHeroes, level = 'easy', selectedEnemies = [0, 0, 0]) {
     selectedEnemies = randomEnemyArray(level);
+    //selectedEnemies = [2, 2, 2];
     for (let i = 0; i < selectedHeroes.length; i++) {
         let type = selectedHeroes[i];
         const unit = new Unit(false, type, randomWarriorPlace());
@@ -223,7 +231,6 @@ function fillAllUnitList(selectedHeroes, level = 'easy', selectedEnemies = [0, 0
     }
 
     for (let i = 0; i < selectedEnemies.length; i++) {
-        let id = allUnits.length;
         let type = selectedEnemies[i];
         const unit = new Unit(true, type, randomEnemyPlace());
         allUnits.push(unit);
@@ -233,6 +240,6 @@ function fillAllUnitList(selectedHeroes, level = 'easy', selectedEnemies = [0, 0
     allUnits = allUnits.sort((a, b) => b.initiative - a.initiative);
     allUnits.forEach((unit, index) => {
         unit.id = index;
-        if (unit.enemy) unit.hp = 1;
+        //if (unit.enemy) unit.hp = 1;
     });
 }

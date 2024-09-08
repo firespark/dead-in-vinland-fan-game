@@ -89,7 +89,7 @@ const warriorsObj = {
         description: 'Crazy, Grumpy, Granny',
         hp: 4,
         ap: 6,
-        skills: ['hit', 'buff', 'debuff'],
+        skills: ['grannyHit', 'grannyBuff', 'grannyDebuff'],
         strength: 60,
         defense: 0,
         aim: 90,

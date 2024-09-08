@@ -87,6 +87,11 @@ nav {
     color: var(--crimson);
 }
 
+main {
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
 .main-screen {
     position: relative;
 }

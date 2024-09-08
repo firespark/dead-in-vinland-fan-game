@@ -92,8 +92,10 @@ const skillsObj = {
             if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
                 logString(`${allUnits[origin].name} protects themselves against ${this.defenseBuff}% of damage`)
                 hitCam(allUnits[origin], [], [], 'shield', this.sound);
+
                 allUnits[target].buffArray.push('shield');
                 allUnits[target].defense += this.defenseBuff;
+
                 drawStatusEffects(target);
                 allUnits[origin].changeAP(this.apCost);
             }
@@ -107,7 +109,7 @@ const skillsObj = {
         description: 'Protecc one',
         attack: 0,
         defenseBuff: 50,
-        apCost: 4,
+        apCost: 3,
         chance: 100,
         onEnemy: false,
         self: false,
@@ -138,7 +140,7 @@ const skillsObj = {
         img: '',
         description: 'Protecc row',
         attack: 0,
-        defenseBuff: 20,
+        defenseBuff: 30,
         apCost: 4,
         chance: 100,
         onEnemy: false,
@@ -180,7 +182,7 @@ const skillsObj = {
         img: '',
         description: 'Protecc n Stronk',
         attack: 0,
-        defenseBuff: 20,
+        defenseBuff: 30,
         strengthBuff: 30,
         aimBuff: 30,
         apCost: 2,
@@ -212,7 +214,7 @@ const skillsObj = {
         img: '',
         description: 'Weak and stupid',
         attack: 0,
-        defenseBuff: 20,
+        defenseBuff: 30,
         strengthBuff: 30,
         aimBuff: 30,
         apCost: 2,
@@ -245,9 +247,9 @@ const skillsObj = {
         img: '',
         description: 'Buff row',
         attack: 0,
-        defenseBuff: 10,
-        strengthBuff: 15,
-        aimBuff: 15,
+        defenseBuff: 20,
+        strengthBuff: 20,
+        aimBuff: 20,
         apCost: 4,
         chance: 100,
         onEnemy: false,
@@ -288,9 +290,9 @@ const skillsObj = {
         img: '',
         description: 'Debuff row',
         attack: 0,
-        defenseBuff: 10,
-        strengthBuff: 15,
-        aimBuff: 15,
+        defenseBuff: 20,
+        strengthBuff: 20,
+        aimBuff: 20,
         apCost: 4,
         chance: 100,
         onEnemy: true,
@@ -363,7 +365,7 @@ const skillsObj = {
         attack: 2,
         defenseBuff: 0,
         apCost: 4,
-        chance: 60,
+        chance: 100,
         onEnemy: true,
         self: false,
         affectsRow: true,
@@ -438,7 +440,7 @@ const skillsObj = {
         attack: 2,
         defenseBuff: 0,
         apCost: 4,
-        chance: 60,
+        chance: 100,
         onEnemy: true,
         self: false,
         affectsRow: true,
@@ -473,6 +475,101 @@ const skillsObj = {
             }
         },
     },
+    grannyHit: {
+        type: 10,
+        name: 'Hit',
+        img: '',
+        description: 'Hehehehehehe',
+        attack: 3,
+        defenseBuff: 0,
+        apCost: 3,
+        chance: 100,
+        onEnemy: true,
+        self: false,
+        rowType: 'melee',
+        sound: 'grannyhit',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                if (isHit(allUnits[origin])) {
+                    const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
+                    logString(`${allUnits[origin].name} hits ${allUnits[target].name} for ${damageAmount} damage`);
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
+                    allUnits[target].damageUnit(damageAmount);
+                    allUnits[target].resetBuffs();
+                }
+                else {
+                    logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
+                }
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
+    grannyBuff: {
+        type: 11,
+        name: 'Buff',
+        img: '',
+        description: 'Hihihihihiii',
+        attack: 0,
+        defenseBuff: 30,
+        strengthBuff: 30,
+        aimBuff: 30,
+        apCost: 2,
+        chance: 100,
+        onEnemy: false,
+        self: false,
+        rowType: 'any',
+        sound: 'grannybuff',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                logString(`${allUnits[origin].name} buffs ${allUnits[target].name}'s strength, aim and defense`)
+
+                hitCam(allUnits[origin], [allUnits[target]], [], 'buff', this.sound);
+                allUnits[target].buffArray.push('buff');
+
+                allUnits[target].strength += this.strengthBuff;
+                allUnits[target].defense += this.defenseBuff;
+                allUnits[target].aim += this.aimBuff;
+
+                drawStatusEffects(target);
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
+    grannyDebuff: {
+        type: 12,
+        name: 'Debuff',
+        img: '',
+        description: 'Kekekekekeee',
+        attack: 0,
+        defenseBuff: 30,
+        strengthBuff: 30,
+        aimBuff: 30,
+        apCost: 2,
+        chance: 100,
+        onEnemy: true,
+        self: false,
+        rowType: 'any',
+        sound: 'grannydebuff',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                logString(`${allUnits[origin].name} weakens ${allUnits[target].name}'s strength, aim and defense`)
+
+                hitCam(allUnits[origin], [allUnits[target]], [], 'debuff', this.sound);
+                allUnits[target].buffArray.push('debuff');
+
+                allUnits[target].strength -= this.strengthBuff;
+                allUnits[target].defense -= this.defenseBuff;
+                allUnits[target].aim -= this.aimBuff;
+
+                drawStatusEffects(target);
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
 
     move: {
         type: 100,
@@ -481,7 +578,27 @@ const skillsObj = {
         self: true,
         onEnemy: false,
         use: function (target, origin = activeUnit) {
-            moveUnit(target);
+            if (allUnits[target].ap >= this.apCost) {
+                logString(`${allUnits[target].name} moves`);
+                playAudio('move');
+                let newPosition = allUnits[target].pos;
+                if (!allUnits[target].enemy) {
+                    if (allUnits[target].pos < 4) newPosition += 3;
+                    else newPosition -= 3;
+                } else {
+                    if (allUnits[target].pos < 10) newPosition += 3;
+                    else newPosition -= 3;
+                }
+
+                const unitDiv = document.getElementById(`unit${allUnits[target].id}`).outerHTML;
+                const currentPosDiv = document.getElementById(`section${allUnits[target].pos}`);
+                currentPosDiv.innerHTML = '';
+                const newPosDiv = document.getElementById(`section${newPosition}`);
+                newPosDiv.innerHTML = unitDiv;
+
+                allUnits[target].pos = newPosition;
+                allUnits[target].changeAP(1);
+            }
         },
     },
 

@@ -6,10 +6,11 @@ const sScreen = document.querySelector('.settings-screen');
 const mScreen = document.querySelector('.main-screen');
 const stScreen = document.querySelector('.statistics-screen');
 const aScreen = document.querySelector('.about-screen');
+const nScreen = document.querySelector('.notice-overlay');
 
 function checkQuitGame() {
-    if (!mScreen.classList.contains('dnone') && !gameEnded) {
-        if (confirm('Are you sure you want to restart?') == true) {
+    if (!mScreen.classList.contains('dnone') && nScreen.classList.contains('dnone')) {
+        if (confirm('Are you sure you want to quit?') == true) {
             cleanUpEndGame();
             return true;
         }
