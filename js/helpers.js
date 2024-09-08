@@ -64,6 +64,7 @@ function calculateDamage(origin, target, damageAmount, attackType = 'melee') {
     if ((rowType != attackType) && attackType != 'any') {
         let oldDamage = damageTotal;
         damageTotal = Math.round(percentageSubstract(damageAmount, wrongLanePenalty));
+        if (damageTotal == 1) damageTotal = (Math.random() >= 0.5) ? 1 : 0;
         //console.log(`applied penalty - reduced from ${oldDamage} to ${damageTotal}`)
     }
 
@@ -103,7 +104,7 @@ function drawStatusEffects(targetID) {
     }
 }
 
-function statisticsAdd(result) {
+function statisticsAdd(result, score) {
     const statCondition = localStorage.getItem('statCondition') ? JSON.parse(localStorage.getItem('statCondition')) : [];
 
     const date = new Date();
@@ -112,6 +113,7 @@ function statisticsAdd(result) {
         date: `${date.getFullYear()}.${('0' + date.getMonth()).slice(-2)}.${('0' + date.getDate()).slice(-2)} ${('0' + date.getHours()).slice(-2)}:${('0' + date.getMinutes()).slice(-2)}`,
         level: difficulty,
         result: result,
+        score: score,
     };
     if (statCondition.length > 9) {
         statCondition.splice(0, 1);

@@ -125,8 +125,17 @@
     font-weight: bold;
 }
 
+.settings-warriors .warrior-type {
+    margin-top: 5px;
+}
+
+.settings-warriors .warrior-descr {
+    margin-top: 5px;
+    font-style: italic;
+}
+
 .settings-warriors .warrior-features {
-    margin-top: 20px;
+    margin-top: 5px;
     font-size: 14px;
 }
 

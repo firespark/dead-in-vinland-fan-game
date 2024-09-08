@@ -262,7 +262,7 @@ function setTargetUnitImg(target, action) {
 
 function logString(string) {
     document.querySelector('.battle-description').innerHTML = string;
-    console.log(string)
+    //console.log(string)
 }
 
 function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {

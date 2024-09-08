@@ -15,7 +15,6 @@ function settingsWarriorsInit() {
         const warriorDiv = document.createElement('div');
         warriorDiv.classList.add('warrior');
         warriorDiv.dataset.id = key;
-
         warriorDiv.innerHTML = `
                                 <div class="warrior-wrapper">
                                     <div class="warrior-portrait">
@@ -23,8 +22,9 @@ function settingsWarriorsInit() {
                                     </div>
                                     <div class="warrior-description">
                                         <div class="warrior-name">${warriorsObj[key].name}</div>
+                                        <div class="warrior-type">${warriorsObj[key].type}</div>
+                                        <div class="warrior-descr">${warriorsObj[key].description}</div>
                                         <div class="warrior-features">
-                                            <i>${warriorsObj[key].description}</i><br><br>
                                             Skills: ${warriorSkills}<br>
                                             Health: ${warriorsObj[key].hp}<br>
                                             Action points: ${warriorsObj[key].ap}<br>

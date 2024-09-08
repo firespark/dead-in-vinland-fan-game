@@ -67,7 +67,7 @@ class Unit {
                 if (effect.name == 'shield' || effect.name == 'buff') {
                     this.defense -= effect.defense;
                     this.strength -= effect.strength;
-                    this.aim -= effect.strength;
+                    this.aim -= effect.aim;
                 }
             });
             let filteredBuffs = this.buffArray.filter(function (buff) {
@@ -85,8 +85,7 @@ class Unit {
                 if (effect.name == 'debuff') {
                     this.defense += effect.defense;
                     this.strength += effect.strength;
-                    this.aim += effect.strength;
-                    this.buffArray.splice(index, 1);
+                    this.aim += effect.aim;
                 }
             });
             let filteredBuffs = this.buffArray.filter(function (buff) {

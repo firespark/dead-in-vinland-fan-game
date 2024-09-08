@@ -22,19 +22,25 @@ let currentDeltaTime = 0;
 
 
 function gameOver() {
-    statisticsAdd('Died');
+    statisticsAdd('Died', 0);
     playAudio('died');
     document.querySelector('.notice-overlay').classList.remove('dnone');
     document.querySelector('.notice-block.fail').classList.remove('dnone');
-    cleanUpEndGame()
+    cleanUpEndGame();
 }
 
 function gameWon() {
-    statisticsAdd('Won');
+    let score = 0;
+    allUnits.forEach(unit => {
+        if (!unit.enemy && unit.alive) {
+            score += unit.hp;
+        }
+    });
+    statisticsAdd('Won', score);
     playAudio('won');
     document.querySelector('.notice-overlay').classList.remove('dnone');
     document.querySelector('.notice-block.success').classList.remove('dnone');
-    cleanUpEndGame()
+    cleanUpEndGame();
 }
 
 function gameLoop(time) {

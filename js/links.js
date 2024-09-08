@@ -39,8 +39,10 @@ function changeScreen(screen) {
 }
 
 function createStatisticsResults() {
-    const statResults = localStorage.getItem('statCondition') ? JSON.parse(localStorage.getItem('statCondition')) : [];
+    let statResults = localStorage.getItem('statCondition') ? JSON.parse(localStorage.getItem('statCondition')) : [];
     statResults.reverse();
+    statResults = statResults.sort((a, b) => b.score - a.score);
+
     const statisticstable = document.querySelector('.statistics-table');
 
     statisticstable.innerHTML = '';
@@ -49,19 +51,23 @@ function createStatisticsResults() {
     let divCell1 = document.createElement('div');
     let divCell2 = document.createElement('div');
     let divCell3 = document.createElement('div');
+    let divCell4 = document.createElement('div');
 
     divRow.classList.add('table-row', 'table-header');
     divCell1.classList.add('table-cell');
     divCell2.classList.add('table-cell');
     divCell3.classList.add('table-cell');
+    divCell4.classList.add('table-cell');
 
     divCell1.innerHTML = 'Date';
     divCell2.innerHTML = 'Level';
     divCell3.innerHTML = 'Result';
+    divCell4.innerHTML = 'Score';
 
     divRow.append(divCell1);
     divRow.append(divCell2);
     divRow.append(divCell3);
+    divRow.append(divCell4);
     statisticstable.append(divRow);
 
     statResults.forEach(result => {
@@ -69,19 +75,23 @@ function createStatisticsResults() {
         let divCell1 = document.createElement('div');
         let divCell2 = document.createElement('div');
         let divCell3 = document.createElement('div');
+        let divCell4 = document.createElement('div');
 
         divRow.classList.add('table-row');
         divCell1.classList.add('table-cell');
         divCell2.classList.add('table-cell');
         divCell3.classList.add('table-cell');
+        divCell4.classList.add('table-cell');
 
         divCell1.innerHTML = result.date;
         divCell2.innerHTML = result.level;
         divCell3.innerHTML = result.result == 'Won' ? '<img src="img/battle-icons/success.png">&nbsp;Won' : '<img src="img/battle-icons/death.png">&nbsp;Died';
+        divCell4.innerHTML = result.score;
 
         divRow.append(divCell1);
         divRow.append(divCell2);
         divRow.append(divCell3);
+        divRow.append(divCell4);
         statisticstable.append(divRow);
     });
 }
