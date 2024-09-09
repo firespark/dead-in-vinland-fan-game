@@ -341,13 +341,18 @@ function hitCam(origin, targetArray, damageArray, actionType, audioName = '') {
 }
 
 function checkIfWon() {
-    if (getRandomFoe() == 'Nothing') {
-        gameWon();
-        return;
+    const nScreen = document.querySelector('.notice-overlay');
+    if (nScreen.classList.contains('dnone')) {
+        {
+            if (getRandomFoe() == 'Nothing' && getRandomHero() != 'Nothing') {
+                gameWon();
+                return;
+            }
+            if (getRandomHero() == 'Nothing' && getRandomFoe() != 'Nothing') {
+                gameOver();
+                return;
+            }
+            return;
+        }
     }
-    if (getRandomHero() == 'Nothing') {
-        gameOver();
-        return;
-    }
-
 }

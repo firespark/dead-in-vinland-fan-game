@@ -73,7 +73,7 @@ function pickRandomAction(availableActions) {
         //console.log(randomAction.name);
         let target = getRandomFoe();
         if (target == 'Nothing') {
-            gameWon();
+            //gameWon();
             return;
         }
         randomAction.use(target);

@@ -18,6 +18,16 @@ let timer = new DeltaTimer(gameLoop, 500);
 let start = timer.start();
 let currentDeltaTime = 0;
 
+/* window.addEventListener('resize', () => {
+    let container = document.body;
+    const minScale = 0.55;
+    const maxScale = 1;
+    let scale = Math.min(window.innerWidth / (container.offsetWidth),
+        window.innerHeight / (container.offsetHeight));
+    scale = Math.min(maxScale, Math.max(minScale, scale))
+    document.documentElement.style.setProperty("--trickyScale", scale);
+}); */
+
 
 
 
