@@ -1,0 +1,54 @@
+@media (max-width: 1440px) {
+    .unit img {
+        width: 220px;
+    }
+
+    .fight-block-row img.idle-image {
+        width: 220px;
+    }
+
+    .fight-block-row img.attack-image {
+        width: 450px;
+    }
+
+    .fight-block-row img.buff-image {
+        width: 300px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .field-row-section {
+        height: 70px;
+    }
+
+    .unit img {
+        width: 150px;
+    }
+
+    .fight-block-row img.idle-image {
+        width: 150px;
+    }
+
+    .fight-block-row img.attack-image {
+        width: 330px;
+    }
+
+    .fight-block-row img.buff-image {
+        width: 230px;
+    }
+}
+
+@media (max-width: 1200px) {
+    body {
+        overflow-x: auto;
+    }
+
+    main {
+        padding: 0 10px;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+}
