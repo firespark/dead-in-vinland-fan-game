@@ -181,6 +181,19 @@ const warriorsObj = {
         aim: 70,
         initiative: 4,
     },
+    14: {
+        name: 'Misha',
+        type: 'Dog',
+        imgFolder: 'dog',
+        description: 'Good boy, Vallhund',
+        hp: 10,
+        ap: 6,
+        skills: ['hit', 'shield', 'debuff'],
+        strength: 30,
+        defense: 20,
+        aim: 95,
+        initiative: 6,
+    },
 };
 
 const enemiesObj = {
