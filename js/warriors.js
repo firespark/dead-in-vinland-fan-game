@@ -192,7 +192,7 @@ const warriorsObj = {
         strength: 30,
         defense: 20,
         aim: 95,
-        initiative: 6,
+        initiative: 1,
     },
 };
 
