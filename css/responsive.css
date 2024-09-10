@@ -16,6 +16,7 @@
         height: calc(100vh - 71px);
         margin: 0 auto;
         aspect-ratio: 18 / 9;
+        background-size: 150%;
     }
 
     .field-row-section {
