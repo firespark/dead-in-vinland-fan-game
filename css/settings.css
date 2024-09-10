@@ -3,9 +3,9 @@
 }
 
 .settings-title {
-    text-align: center;
-    color: #fff;
     font-size: 22px;
+    color: #fff;
+    text-align: center;
 }
 
 .settings-header {
@@ -21,21 +21,21 @@
 }
 
 .settings-level-block {
-    margin-top: 30px;
     display: flex;
     justify-content: center;
+    margin-top: 30px;
 }
 
 .settings-level-block .level {
-    font-size: 20px;
     width: 100px;
     margin: 0 10px;
     padding: 10px;
+    font-size: 20px;
     text-align: center;
-    border-radius: 10px;
     color: #fff;
-    cursor: pointer;
     border: 3px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .settings-level-block .level.easy {
@@ -57,8 +57,8 @@
 .settings-level-block .level.easy:hover,
 .settings-level-block .level.medium:hover,
 .settings-level-block .level.hard:hover {
-    filter: drop-shadow(0 0px 16px rgb(215, 77, 77));
     border: 3px solid crimson;
+    filter: drop-shadow(0 0px 16px rgb(215, 77, 77));
 }
 
 .settings-warriors {
@@ -73,27 +73,27 @@
 }
 
 .settings-warriors .warrior {
-    background-color: #dfdfdff0;
     padding: 10px;
+    background-color: #dfdfdff0;
+    border: 5px solid transparent;
     border-radius: 10px;
     cursor: pointer;
-    border: 5px solid transparent;
 }
 
 .settings-warriors .warrior:hover {
-    filter: drop-shadow(0 0px 26px rgb(77, 111, 215));
     border: 5px solid #6514dc;
+    filter: drop-shadow(0 0px 26px rgb(77, 111, 215));
 }
 
 .settings-warriors .warrior.active {
-    filter: drop-shadow(0 0px 26px rgb(215, 77, 77));
     border: 5px solid crimson;
+    filter: drop-shadow(0 0px 26px rgb(215, 77, 77));
 }
 
 .settings-warriors .warrior.disabled {
     background-color: #595959;
-    cursor: default;
     filter: grayscale(100%);
+    cursor: default;
     pointer-events: none;
 }
 
@@ -144,28 +144,29 @@
 }
 
 .settings-submit-button {
-    font-size: 24px;
+
     width: 200px;
     margin: 10px auto;
     padding: 10px;
+    font-size: 24px;
     text-align: center;
+    cursor: pointer;
+    background-color: #ff4f5f;
+    border: 3px solid transparent;
     border-radius: 10px;
     color: #fff;
-    cursor: pointer;
-    border: 3px solid transparent;
-    background-color: #ff4f5f;
     filter: drop-shadow(0 0px 10px rgb(240, 50, 98));
     transition: 0.5s;
 }
 
 .settings-submit-button:hover {
-    transform: scale(1.1);
     background-color: #bd3340;
+    transform: scale(1.1);
 }
 
 .settings-submit-button.disabled {
-    background: #979292;
     color: #bfbaba;
+    background: #979292;
     filter: none;
     cursor: default;
     pointer-events: none;

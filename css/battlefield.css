@@ -1,10 +1,10 @@
 .battle-screen {
     position: relative;
-    min-height: calc(100vh - 137px);
     display: flex;
     align-items: end;
     flex-direction: column;
     justify-content: end;
+    min-height: calc(100vh - 137px);
     background-image: url('../img/bg/1.png');
     background-position: bottom;
     background-repeat: no-repeat;
@@ -20,27 +20,27 @@
 .battle-order {
     display: flex;
     justify-content: center;
-    width: 430px;
+    width: fit-content;
     margin: 10px auto 0;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
 }
 
 .battle-description {
-    width: 430px;
-    margin: 5px auto 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    padding: 10px;
+    width: fit-content;
     box-sizing: border-box;
-    text-align: center;
+    margin: 5px auto 0;
+    padding: 10px;
     font-size: 16px;
     color: #fff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
 }
 
 .battle-description.priority {
-    z-index: 9;
     position: relative;
+    z-index: 9;
 }
 
 .order-warrior {
@@ -62,8 +62,8 @@
 .battlefield {
     display: flex;
     width: 100%;
-    padding: 10px;
     box-sizing: border-box;
+    padding: 10px;
 }
 
 .left-field {

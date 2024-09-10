@@ -1,7 +1,57 @@
 @media (max-width: 1600px) {
-    .unit img {
-        width: 220px;
+
+    .logo img {
+        width: 100px;
     }
+
+    .logo .logo-text {
+        font-size: 16px;
+    }
+
+    .nav-menu li {
+        font-size: 16px;
+    }
+
+    .battle-screen {
+        height: calc(100vh - 71px);
+        margin: 0 auto;
+        aspect-ratio: 18 / 9;
+    }
+
+    .field-row-section {
+        height: 13vh;
+    }
+
+    .unit {
+        width: 50%;
+    }
+
+    .unit-name {
+        margin: 0 auto 3px;
+        font-size: 13px;
+    }
+
+    .unit-health {
+        margin: 0 auto 2px;
+    }
+
+    .unit-health .hp {
+        width: 3px;
+        height: 7px;
+    }
+
+    .unit-effects {
+        margin: 1px auto 0;
+        padding: 3px;
+    }
+
+    .unit img {
+        width: 100%;
+    }
+
+    /* .unit img {
+        width: 220px;
+    } */
 
     .fight-block-row img.idle-image {
         width: 220px;
@@ -14,16 +64,84 @@
     .fight-block-row img.buff-image {
         width: 300px;
     }
+
+    .battle-order {
+        padding: 6px 6px 3px;
+    }
+
+    .order-warrior {
+        margin: 10px 2px;
+    }
+
+    .order-warrior img {
+        width: 40px;
+    }
+
+    .battle-description {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .actions-battle-icon img {
+        width: 70px;
+    }
+
+    .actions-ap .ap {
+        width: 14px;
+        height: 4px;
+    }
+
+    .action {
+        width: 30px;
+        height: 30px;
+        margin: 8px;
+    }
+
+    .actions-ap-cost .ap-cost {
+        width: 5px;
+        height: 4px;
+    }
+
+    .action:hover .action-tooltip {
+        width: 200px;
+        height: 130px;
+    }
+
+    .action-tooltip .tooltip-title {
+        margin-bottom: 5px;
+    }
+
+    .footer-container {
+        font-size: 16px;
+    }
+
+    a.footer-github img {
+        width: 30px;
+    }
+
+    a.footer-github span {
+        margin-left: 10px;
+    }
+
+    a.footer-rss img {
+        width: 60px;
+    }
+}
+
+@media (max-width: 1500px) {
+    .battle-screen {
+        aspect-ratio: 16 / 9;
+    }
 }
 
 @media (max-width: 1366px) {
-    .field-row-section {
+    /* .field-row-section {
         height: 70px;
     }
 
     .unit img {
         width: 150px;
-    }
+    } */
 
     .fight-block-row img.idle-image {
         width: 150px;
@@ -35,6 +153,12 @@
 
     .fight-block-row img.buff-image {
         width: 230px;
+    }
+}
+
+@media (max-width: 1250px) {
+    .battle-screen {
+        aspect-ratio: 15 / 9;
     }
 }
 

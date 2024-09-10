@@ -1,6 +1,6 @@
 .field-row-section:first-child .unit {
-    right: 0;
     left: auto;
+    right: 0;
 }
 
 .field-row-section:last-child .unit {
@@ -10,27 +10,27 @@
 
 .unit {
     position: absolute;
-    bottom: 0;
     left: 25%;
+    bottom: 0;
 }
 
 .unit-name {
     width: fit-content;
     margin: 0 auto 5px;
     padding: 5px 10px;
-    border-radius: 5px;
+    color: #ffffff;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.7);
-    color: #ffffff;
+    border-radius: 5px;
 }
 
 .unit-health {
     display: flex;
     justify-content: center;
     width: fit-content;
+    padding: 5px;
     margin: 0 auto 5px;
     background: rgba(0, 0, 0, 0.6);
-    padding: 5px;
     border-radius: 5px;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .unit-health .hp.empty {
-    border: 1px solid #00c3ff;
     background-color: transparent;
+    border: 1px solid #00c3ff;
 }
 
 .enemy .unit-health .hp {
@@ -52,8 +52,8 @@
 }
 
 .enemy .unit-health .hp.empty {
-    border: 1px solid crimson;
     background-color: transparent;
+    border: 1px solid crimson;
 }
 
 .unit img {
@@ -65,15 +65,14 @@
 }
 
 .unit.select-unit {
-    cursor: pointer;
     filter: drop-shadow(0 0 2px rgb(220, 217, 20));
     transition: 0.5s;
+    cursor: pointer;
 }
 
 .unit.select-unit:hover,
 .unit.select-unit.row-selected {
     filter: drop-shadow(0 0 5px crimson);
-    /*z-index: 8;*/
     transform: scale(1.1);
 }
 
@@ -113,10 +112,10 @@
 .unit-effects {
     width: fit-content;
     margin: 2px auto 0;
-    background: rgba(0, 0, 0, 0.6);
     padding: 5px;
-    border-radius: 5px;
     text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
 }
 
 .unit-effects .effect-icons img {
@@ -124,6 +123,6 @@
 }
 
 .unit-effects .effect-text {
-    color: #fff;
     font-size: 10px;
+    color: #fff;
 }

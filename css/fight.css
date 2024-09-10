@@ -2,18 +2,14 @@
     position: absolute;
     top: 0;
     display: flex;
-    width: 100%;
-    background: #172226d1;
-    /*background-image: url('../img/bg/battle.jpg');*/
     justify-content: center;
     align-items: end;
+    width: 100%;
     height: 100%;
+    background: #172226d1;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    justify-content: center;
-    align-items: end;
-    height: 100%;
 }
 
 .fight-overlay .fight-block {
@@ -70,25 +66,24 @@
 }
 
 .fight-damage {
-    color: #db3232;
     font-size: 6em;
-    -webkit-text-stroke: 2px #fff;
     font-weight: bold;
+    color: #db3232;
+    -webkit-text-stroke: 2px #fff;
     filter: drop-shadow(0 0px 6px rgb(0, 0, 0));
 }
 
 .fight-icon {
     position: absolute;
-    z-index: 9;
-    width: 100%;
-    height: 100%;
     top: 0;
+    z-index: 9;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
+    height: 100%;
     animation: zoom-in 2s ease-in-out;
-
 }
 
 .fight-icon img {

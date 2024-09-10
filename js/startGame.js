@@ -112,7 +112,7 @@ function startGameButton() {
             document.querySelector('.settings-screen').classList.add('dnone');
             document.querySelector('.main-screen').classList.remove('dnone');
 
-            document.querySelector('.battle-screen').style.backgroundImage = `url('img/bg/${getRandomInt(1, 13)}.png')`
+            document.querySelector('.battle-screen').style.backgroundImage = `url('img/bg/${getRandomInt(1, 16)}.png')`
 
             fillAllUnitList(selectedWarriors, difficulty);
             placeUnits();
