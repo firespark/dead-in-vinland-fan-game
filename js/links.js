@@ -41,7 +41,7 @@ function changeScreen(screen) {
 function createStatisticsResults() {
     let statResults = localStorage.getItem('statCondition') ? JSON.parse(localStorage.getItem('statCondition')) : [];
     statResults.reverse();
-    console.log(statResults[0])
+
     let newStatResults = [...statResults];
 
     newStatResults = newStatResults.sort((a, b) => b.score - a.score);
@@ -74,7 +74,7 @@ function createStatisticsResults() {
     statisticstable.append(divRow);
 
     newStatResults.forEach((result, index) => {
-        console.log(statResults[0])
+
         let divRow = document.createElement('div');
         let divCell1 = document.createElement('div');
         let divCell2 = document.createElement('div');
