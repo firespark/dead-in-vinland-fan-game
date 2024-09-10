@@ -188,7 +188,7 @@ const warriorsObj = {
         description: 'Good boy, Vallhund',
         hp: 10,
         ap: 6,
-        skills: ['hit', 'shield', 'debuff'],
+        skills: ['bite', 'protect', 'scare'],
         strength: 30,
         defense: 20,
         aim: 95,

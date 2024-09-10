@@ -582,7 +582,103 @@ const skillsObj = {
             }
         },
     },
+    bite: {
+        type: 13,
+        name: 'Bite',
+        img: '',
+        description: 'Nom!',
+        attack: 3,
+        defenseBuff: 0,
+        apCost: 3,
+        chance: 100,
+        onEnemy: true,
+        self: false,
+        rowType: 'melee',
+        sound: 'doghit',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                if (isHit(allUnits[origin])) {
+                    const damageAmount = calculateDamage(allUnits[origin], allUnits[target], this.attack, this.rowType);
+                    logString(`${allUnits[origin].name} bites ${allUnits[target].name} for ${damageAmount} damage`);
+                    hitCam(allUnits[origin], [allUnits[target]], [damageAmount], 'attack', this.sound);
+                    allUnits[target].damageUnit(damageAmount);
+                }
+                else {
+                    logString(`${allUnits[origin].name} misses their attack on ${allUnits[target].name}`);
+                    hitCam(allUnits[origin], [allUnits[target]], ['Miss'], 'attack', 'swoosh');
+                }
+                allUnits[origin].resetDebuffs();
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
+    protect: {
+        type: 14,
+        name: 'Protect',
+        img: '',
+        description: 'Woof!',
+        attack: 0,
+        defenseBuff: 50,
+        apCost: 3,
+        chance: 100,
+        onEnemy: false,
+        self: false,
+        rowType: 'melee',
+        sound: 'dogshield',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                logString(`${allUnits[origin].name} protects ${allUnits[target].name} against ${this.defenseBuff}% of damage`)
+                hitCam(allUnits[origin], [allUnits[target]], [], 'shield', this.sound);
 
+                let defenseBuffAmount = this.defenseBuff;
+                if (getRowType(allUnits[origin]) != this.rowType) {
+                    defenseBuffAmount = Math.round(percentageSubstract(defenseBuffAmount, wrongLaneShieldPenalty));
+                }
+
+                let buff = new Buff('shield', defenseBuffAmount, 0, 0);
+                allUnits[target].buffArray.push(buff);
+                allUnits[target].defense += defenseBuffAmount;
+                drawStatusEffects(target);
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
+    scare: {
+        type: 15,
+        name: 'Scare',
+        img: '',
+        description: 'Rawr!',
+        attack: 0,
+        defenseBuff: 30,
+        strengthBuff: 30,
+        aimBuff: 30,
+        apCost: 3,
+        chance: 100,
+        onEnemy: true,
+        self: false,
+        rowType: 'any',
+        sound: 'dogdebuff',
+        use: function (target, origin = activeUnit) {
+            resetHighlight();
+            if (allUnits[target].alive && allUnits[origin].ap >= this.apCost) {
+                logString(`${allUnits[origin].name} weakens ${allUnits[target].name}'s strength, aim and defense with their roar`)
+
+                hitCam(allUnits[origin], [allUnits[target]], [], 'debuff', this.sound);
+
+                let buff = new Buff('debuff', this.defenseBuff, this.strengthBuff, this.aimBuff);
+                allUnits[target].buffArray.push(buff);
+
+                allUnits[target].strength -= this.strengthBuff;
+                allUnits[target].defense -= this.defenseBuff;
+                allUnits[target].aim -= this.aimBuff;
+
+                drawStatusEffects(target);
+                allUnits[origin].changeAP(this.apCost);
+            }
+        },
+    },
     move: {
         type: 100,
         apCost: 1,

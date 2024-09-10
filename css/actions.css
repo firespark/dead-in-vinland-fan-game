@@ -206,6 +206,21 @@
     filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
 }
 
+.action.bite .action-bg {
+    background-image: url('../img/battle-icons/doghit-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(236, 0, 0));
+}
+
+.action.protect .action-bg {
+    background-image: url('../img/battle-icons/dog-shield.png');
+    filter: drop-shadow(0 0px 6px rgb(0, 230, 79));
+}
+
+.action.scare .action-bg {
+    background-image: url('../img/battle-icons/dogdebuff-icon.png');
+    filter: drop-shadow(0 0px 6px rgb(242, 173, 9));
+}
+
 .actions-extra {
     display: flex;
 }
