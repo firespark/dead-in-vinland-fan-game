@@ -37,7 +37,7 @@ async function activateBrain() {
             }
             if (allUnits[activeUnit]) {
                 await delay(2000).then(function () {
-                    if (!gameEnded && allUnits[activeUnit].enemy && (allUnits[activeUnit].ap <= 0 || (!continueTurn))) {
+                    if (!gameEnded && allUnits[activeUnit].enemy && (allUnits[activeUnit].ap <= 0 || !continueTurn)) {
                         endTurn();
                     }
                 });
