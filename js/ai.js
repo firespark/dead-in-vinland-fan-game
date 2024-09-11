@@ -4,16 +4,27 @@ async function activateBrain() {
             let availableActions = [];
             availableActions = [...allUnits[activeUnit].skills];
             availableActions.push('move');
+            let continueTurn = true;
 
             while (enableAI && availableActions.length > 0 && !gameEnded) {
+                continueTurn = true;
 
-                if (allUnits[activeUnit].ap < 1 || !allUnits[activeUnit].alive || !allUnits[activeUnit].enemy)
+                if (allUnits[activeUnit].ap <= 0 || !allUnits[activeUnit].alive || !allUnits[activeUnit].enemy)
                     break;
+
                 availableActions.forEach((action, index) => {
                     if (skillsObj[action].apCost > allUnits[activeUnit].ap) {
                         availableActions.splice(index, 1);
                     }
                 });
+
+                if (availableActions.length == 1) {
+                    if (getRandomInt(0, 1) === 0) {
+                        //console.log('Random skipping of turn')
+                        continueTurn = false;
+                        break;
+                    }
+                }
 
                 await delay(1500).then(function () {
                     if (!gameEnded && allUnits.length > 0) {
@@ -26,7 +37,7 @@ async function activateBrain() {
             }
             if (allUnits[activeUnit]) {
                 await delay(2000).then(function () {
-                    if (!gameEnded && allUnits[activeUnit].enemy && allUnits[activeUnit].ap < 1) {
+                    if (!gameEnded && allUnits[activeUnit].enemy && (allUnits[activeUnit].ap <= 0 || (!continueTurn))) {
                         endTurn();
                     }
                 });
