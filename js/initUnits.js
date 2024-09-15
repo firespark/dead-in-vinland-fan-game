@@ -100,6 +100,8 @@ class Unit {
         this.alive = false;
         if (this.name == 'Gudrun')
             playAudio('grannydeath');
+        else if (this.name == 'Misha')
+            playAudio('dogdeath');
         else
             playAudio('kill');
 
